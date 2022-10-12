@@ -7,13 +7,12 @@ app = FastAPI(title='Film rating regressor',
               )
 
 
-
+model = RatingModel()
 
 @app.post('/single_predict')
 async def get_prediction(description: DescrRequest):
     """take description of film and return rating"""
     description = description.descr
-    model = RatingModel()
     prediction = model.predict_single(description)
     return prediction
 
