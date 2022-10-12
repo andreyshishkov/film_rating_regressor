@@ -1,0 +1,1 @@
+docker build -t film-rating-regressor:1.0.0 .

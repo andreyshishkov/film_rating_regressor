@@ -1,1 +1,1 @@
- uvicorn film_rating_regressor.main:app --reload
+ uvicorn film_rating_regressor.app:app --reload
