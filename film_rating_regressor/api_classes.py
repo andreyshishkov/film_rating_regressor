@@ -1,5 +1,12 @@
+import os
 import pickle
 from pydantic import BaseModel
+import os
+
+try:
+    os.chdir('./film_rating_regressor')
+except:
+    pass
 
 
 class DescrRequest(BaseModel):
@@ -15,7 +22,7 @@ class RatingModel:
     def predict_single(self, descr: str):
         data_in = [descr]
         prediction = self._model.predict(data_in)
-        return prediction
+        return prediction.tolist()
 
 
 if __name__ == '__main__':

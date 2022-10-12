@@ -1,13 +1,13 @@
 from sklearn.svm import SVR
 from sklearn.feature_extraction.text import TfidfVectorizer
-from text_normalizer import Normalizer
+from film_rating_regressor.text_normalizer import Normalizer
 from sklearn.pipeline import Pipeline
 import pandas as pd
 import pickle
 
 
 def create_pipeline():
-    pipeline = tf_idf_lr = Pipeline([
+    pipeline = Pipeline([
         ('normalizer', Normalizer()),
         ('tf-idf', TfidfVectorizer(preprocessor=' '.join)),
         ('lr', SVR())

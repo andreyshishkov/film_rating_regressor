@@ -1,13 +1,12 @@
 from fastapi import FastAPI
-import pickle
 from film_rating_regressor.api_classes import RatingModel, DescrRequest
 
+
+model = RatingModel()
 app = FastAPI(title='Film rating regressor',
               description='API predict rating of film using movie description'
               )
 
-
-model = RatingModel()
 
 @app.post('/single_predict')
 async def get_prediction(description: DescrRequest):
