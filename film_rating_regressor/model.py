@@ -22,5 +22,5 @@ if __name__ == '__main__':
     model = create_pipeline()
     model.fit(X, y)
 
-    with open('../data/model.pkl', 'wb') as file:
+    with open('model.pkl', 'wb') as file:
         pickle.dump(model, file)

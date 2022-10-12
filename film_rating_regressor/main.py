@@ -1,9 +1,23 @@
+from fastapi import FastAPI
 import pickle
+from film_rating_regressor.api_classes import RatingModel, DescrRequest
 
-with open('../data/model.pkl', 'rb') as file:
-    model = pickle.load(file)
+app = FastAPI(title='Film rating regressor',
+              description='API predict rating of film using movie description'
+              )
 
-example = ['1987 год. Джордан Белфорт становится брокером в успешном инвестиционном банке. Вскоре банк закрывается после внезапного обвала индекса Доу-Джонса. По совету жены Терезы Джордан устраивается в небольшое заведение, занимающееся мелкими акциями. Его настойчивый стиль общения с клиентами и врождённая харизма быстро даёт свои плоды. Он знакомится с соседом по дому Донни, торговцем, который сразу находит общий язык с Джорданом и решает открыть с ним собственную фирму. В качестве сотрудников они нанимают нескольких друзей Белфорта, его отца Макса и называют компанию «Стрэттон Оукмонт». В свободное от работы время Джордан прожигает жизнь: лавирует от одной вечеринки к другой, вступает в сексуальные отношения с проститутками, употребляет множество наркотических препаратов, в том числе кокаин и кваалюд. Однажды наступает момент, когда быстрым обогащением Белфорта начинает интересоваться агент ФБР...']
 
-value = model.predict(example)[0]  # result is 7.800096127154957
-print(value)
+
+
+@app.post('/single_predict')
+async def get_prediction(description: DescrRequest):
+    """take description of film and return rating"""
+    description = description.descr
+    model = RatingModel()
+    prediction = model.predict_single(description)
+    return prediction
+
+
+@app.get('/')
+async def greet():
+    return 'Hello, user'
